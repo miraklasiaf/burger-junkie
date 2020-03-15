@@ -11,10 +11,14 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm-run-all --parallel start:css start:react",
+    "build": "npm-run-all build:css build:react",
+    "start:react": "sleep 2 && react-scripts start",
+    "build:react": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:css": "postcss src/shared/tailwind.css -o src/index.css -w",
+    "build:css": "cross-env NODE_ENV=production postcss src/shared/tailwind.css -o src/index.css"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +34,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "autoprefixer": "^9.7.4",
+    "cross-env": "^7.0.2",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^7.1.0",
+    "prop-types": "^15.7.2",
+    "tailwindcss": "^1.2.0"
   }
 }
