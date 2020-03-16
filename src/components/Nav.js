@@ -4,9 +4,8 @@ import {
     HeaderWrapper, 
     HeaderContainer, 
     LeftSection, 
+    MidSection,
     RightSection, 
-    MidNavContainer,
-    RightNavContainer, 
     Navigation,
     NavLink 
 } from './styles'
@@ -21,35 +20,38 @@ export default function Nav() {
               <p>Burger Junkie</p>
             </NavLink>
           </LeftSection>
+          <MidSection>
+            <NavLink to="/">
+              <GiHamburger className="spin" />
+            </NavLink>
+          </MidSection>
           <RightSection>
-            <MidNavContainer>
-              <NavLink className="block" to="/">
-                <GiHamburger className="spin" />
-              </NavLink>
-            </MidNavContainer>
-            <RightNavContainer>
-              <Navigation>
-                <NavLink
-                  className="block flex items-center hover:text-gray-700 mr-5"
-                  to="order"
-                >
-                  Order
-                </NavLink>
-                <NavLink
-                  className="block flex items-center hover:text-gray-700 mr-5"
-                  to="checkout"
-                >
-                  Checkout
-                </NavLink>
-                <NavLink
-                  className="block flex items-center hover:text-gray-700"
-                  to="login"
-                >
-                  Login
-                </NavLink>
-              </Navigation>
-            </RightNavContainer>
+            <Navigation>
+              <NavLink
+                className="block flex items-center hover:text-gray-700 mr-5"
+                to="order"
+              >
+                Order
+            </NavLink>
+              <NavLink
+                className="block flex items-center hover:text-gray-700 mr-5"
+                to="checkout"
+              >
+                Checkout
+            </NavLink>
+              <NavLink
+                className="block flex items-center hover:text-gray-700"
+                to="login"
+              >
+                Login
+            </NavLink>
+            </Navigation>
           </RightSection>
+          <button type="button" className="text-gray-500 hover:text-gray-400 sm:hidden">
+            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path fillRule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
+            </svg>
+          </button>
         </HeaderContainer>
       </HeaderWrapper>
     )

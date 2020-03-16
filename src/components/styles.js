@@ -11,63 +11,53 @@ export const AppContainer = tw.div`
  * Header Section
  */
 export const AppHeader = tw.header`
-  flex bg-white w-full px-4 py-3 items-center border-b border-gray-200 h-16 top-0 inset-x-0 z-100 fixed
+  bg-white w-full h-16 px-4 py-3 flex justify-center items-center border-b border-gray-500 fixed z-9999
 `
 
 export const HeaderWrapper = tw.div`
-   w-full max-w-screen-xl relative mx-auto px-6
+  w-full max-w-screen-xl relative items-center mx-auto
 `
 
 export const HeaderContainer = tw.div`
-  flex items-center -mx-6
+  flex items-center justify-between text-gray-700
 `
 
 export const LeftSection = tw.div`
-  lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8
+  w-64
 `
-
+export const MidSection = tw.div`
+  hidden lg:w-64 justify-center py-3 xl:flex
+`
 export const RightSection = tw.div`
-  flex flex-grow lg:w-3/4 xl:w-4/5
-`
-
-export const MidNavContainer = tw.div`
-  w-full flex justify-center items-center lg:px-6 xl:w-3/4 xl:px-12
-`
-
-export const RightNavContainer = tw.div`
-  hidden lg:flex lg:items-center lg:justify-between xl:w-1/4 px-6
+  w-64
 `
 
 export const Navigation = tw.div`
-  flex justify-start items-center text-gray-500
+  hidden sm:flex justify-end items-center text-gray-700
 `
 
 export const NavLink = styled(({ right, ...props }) => <Link {...props} />)`
-  ${props => props.right && 'margin-left: auto;'}
+  ${props => props.right && 'bg-red-600'}
 `
 
 /*
  * Main Section
  */
 export const AppMain = tw.main`
-  w-full max-w-screen-xl mx-auto px-6
+  w-full flex flex-col items-center mt-16
 `
 
 export const MainWrapper = tw.div`
-  lg:flex -mx-6
+  w-full max-w-screen-xl
 `
 
 export const ContentWrapper = tw.div`
-  min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5
-`
-
-export const ContentContainer = tw.div`
-  pt-24 pb-16 lg:pt-28 w-full
+  bg-white min-h-screen w-full
 `
 
 /*
  * Footer Section
  */
 export const AppFooter = tw.footer`
-  bg-white w-full text-center pb-8
+  bg-gray-900 w-full items-center text-center
 `

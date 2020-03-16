@@ -1,10 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'
-import { 
-  AppContainer, 
-  AppHeader, 
-  AppMain, 
-  MainWrapper, ContentWrapper, ContentContainer, AppFooter } from './styles'
+import { AppContainer, AppHeader, AppMain, MainWrapper, ContentWrapper, AppFooter } from './styles'
 import Nav from './Nav'
 import Footer from './Footer'
 import Home from '../screens/Home'
@@ -21,18 +17,15 @@ function App() {
       <AppMain>
         <MainWrapper>
           <ContentWrapper>
-            <ContentContainer>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/order" element={<Order />} />
-                <Route path="/checkout" element={<Checkout />} />
-              </Routes>
-            </ContentContainer>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/order" element={<Order />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Routes>
           </ContentWrapper>
         </MainWrapper>
       </AppMain>
-
-      <AppFooter>
+      <AppFooter> 
         <Footer />
       </AppFooter>
     </AppContainer>
