@@ -1,5 +1,5 @@
 {
-  "name": "react-functional-based",
+  "name": "burger-junkie",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +8,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "formik": "^2.1.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router": "^6.0.0-alpha.2",
@@ -21,9 +23,11 @@
     "build:react": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:css": "postcss src/shared/tailwind.pcss -o src/index.css -w",
-    "build:css": "cross-env NODE_ENV=production postcss src/shared/tailwind.pcss -o src/index.css",
-    "lint": "eslint \"src/**/*.{js,json}\""
+    "start:css": "postcss src/assets/tailwind.pcss -o src/index.css -w",
+    "build:css": "cross-env NODE_ENV=production postcss src/assets/tailwind.pcss -o src/index.css",
+    "lint": "eslint \"src/**/*.{js,json}\"",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,11 +46,20 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@storybook/addon-actions": "^5.3.17",
+    "@storybook/addon-links": "^5.3.17",
+    "@storybook/addons": "^5.3.17",
+    "@storybook/preset-create-react-app": "^2.0.0",
+    "@storybook/react": "^5.3.17",
     "autoprefixer": "^9.7.4",
     "cross-env": "^7.0.2",
+    "cypress": "^4.2.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-standard-react": "^9.2.0",
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^7.1.0",
     "prop-types": "^15.7.2",
+    "react-axe": "^3.4.1",
     "react-icons": "^3.9.0",
     "tailwind.macro": "^1.0.0-alpha.10",
     "tailwindcss": "^1.2.0"
