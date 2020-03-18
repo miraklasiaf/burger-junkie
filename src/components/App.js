@@ -1,35 +1,46 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'
-import { AppContainer, AppHeader, AppMain, MainWrapper, ContentWrapper, AppFooter } from './styles'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Nav from './Nav'
 import Footer from './Footer'
 import Home from '../screens/Home'
 import Order from '../screens/Order'
 import Checkout from '../screens/Checkout'
+import { GlobalProvider } from '../context/GlobalState'
+import {
+  AppContainer,
+  AppHeader,
+  AppMain,
+  MainWrapper,
+  AppFooter,
+  FooterWrapper,
+} from './styles'
 
-function App() {
+export default function App() {
   return (
-    <AppContainer>
-      <AppHeader>
-        <Nav />
-      </AppHeader>
+    <GlobalProvider>
+      <Router>
+        <AppContainer>
+          <AppHeader>
+            <Nav />
+          </AppHeader>
 
-      <AppMain>
-        <MainWrapper>
-          <ContentWrapper>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/order" element={<Order />} />
-              <Route path="/checkout" element={<Checkout />} />
-            </Routes>
-          </ContentWrapper>
-        </MainWrapper>
-      </AppMain>
-      <AppFooter> 
-        <Footer />
-      </AppFooter>
-    </AppContainer>
+          <AppMain>
+            <MainWrapper>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/order" element={<Order />} />
+                <Route path="/checkout" element={<Checkout />} />
+              </Routes>
+            </MainWrapper>
+          </AppMain>
+
+          <AppFooter>
+            <FooterWrapper>
+              <Footer />
+            </FooterWrapper>
+          </AppFooter>
+        </AppContainer>
+      </Router>
+    </GlobalProvider>
   )
 }
-
-export default App;

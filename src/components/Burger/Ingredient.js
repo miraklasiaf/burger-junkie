@@ -1,5 +1,5 @@
 import React from 'react'
-import { BreadTop, BreadBottom, Meat, Bacon, Salad, Cheese } from './styles'
+import { BreadTop, Seed1, Seed2, BreadBottom, Meat, Bacon, Salad, Cheese } from './styles'
 
 export default function Ingredient({ type }) {
     let ingredient = null
@@ -9,7 +9,7 @@ export default function Ingredient({ type }) {
             ingredient = <BreadBottom />
             break
         case 'bread-top':
-            ingredient = <BreadTop />
+            ingredient = <BreadTop ><Seed1 /><Seed2 /></BreadTop>
             break
         case 'meat':
             ingredient = <Meat />

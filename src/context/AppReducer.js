@@ -1,40 +1,41 @@
+const INGREDIENT_PRICES = {
+  salad: 1000,
+  cheese: 1500,
+  meat: 3000,
+  bacon: 5000
+};
+
 export default (state, action) => {
   switch (action.type) {
     case 'SET_INGREDIENTS':
       return {
         ...state,
-        loading: false,
         ingredients: action.payload,
+        loading: false
       }
     case 'SET_INGREDIENTS_ERROR':
       return {
         ...state,
-        error: action.payload
+        error: true
       }
-    case 'GET_TRANSACTIONS':
+    case 'ADD_INGREDIENT':
       return {
         ...state,
-        loading: false,
-        transactions: action.payload,
-      }
-    case 'DELETE_TRANSACTION':
+        ingredients: {
+          ...state.ingredients,
+          [action.payload]: state.ingredients[action.payload] + 1
+        },
+        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.payload],
+    }
+    case 'DELETE_INGREDIENT':
       return {
         ...state,
-        transactions: state.transactions.filter(
-          transaction => transaction._id !== action.payload,
-        ),
+        ingredients: {
+          ...state.ingredients,
+          [action.payload]: state.ingredients[action.payload] - 1
+        },
+        totalPrice: state.totalPrice - INGREDIENT_PRICES[action.payload]
       }
-    case 'ADD_TRANSACTION':
-      return {
-        ...state,
-        transactions: [...state.transactions, action.payload],
-      }
-    case 'TRANSACTION_ERROR':
-      return {
-        ...state,
-        error: action.payload,
-      }
-    default:
-      throw new Error()
+    default: throw new Error()
   }
 }

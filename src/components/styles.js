@@ -11,7 +11,7 @@ export const AppContainer = tw.div`
  * Header Section
  */
 export const AppHeader = tw.header`
-  bg-white w-full h-16 px-4 py-3 flex justify-center items-center border-b border-gray-500 fixed z-9999
+  bg-blue-800 w-full h-16 px-4 py-2 flex justify-center items-center border-b border-blue-500 fixed z-100
 `
 
 export const HeaderWrapper = tw.div`
@@ -19,21 +19,23 @@ export const HeaderWrapper = tw.div`
 `
 
 export const HeaderContainer = tw.div`
-  flex items-center justify-between text-gray-700
+  flex items-center justify-between text-blue-100
 `
 
 export const LeftSection = tw.div`
   w-64
 `
+
 export const MidSection = tw.div`
   hidden lg:w-64 justify-center py-3 xl:flex
 `
+
 export const RightSection = tw.div`
   w-64
 `
 
 export const Navigation = tw.div`
-  hidden sm:flex justify-end items-center text-gray-700
+  hidden sm:flex justify-end items-center text-blue-100
 `
 
 export const NavLink = styled(({ right, ...props }) => <Link {...props} />)`
@@ -48,16 +50,16 @@ export const AppMain = tw.main`
 `
 
 export const MainWrapper = tw.div`
-  w-full max-w-screen-xl
-`
-
-export const ContentWrapper = tw.div`
-  bg-white min-h-screen w-full
+  bg-black w-full max-w-screen-xl
 `
 
 /*
  * Footer Section
  */
 export const AppFooter = tw.footer`
-  bg-gray-900 w-full items-center text-center
+  w-full flex flex-col items-center
+`
+
+export const FooterWrapper = tw.div`
+  bg-blue-200 w-full max-w-screen-xl px-4 text-center
 `

@@ -10965,7 +10965,7 @@ code {
  * .skew-45 { ... }
  */
 
-@import 'shared/custom-utilities.css';
+@import 'assets/custom-utilities.css';
 
 /* Reset Box sizing */
 

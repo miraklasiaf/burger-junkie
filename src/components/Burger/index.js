@@ -2,7 +2,8 @@ import React from 'react'
 import Ingredient from './Ingredient'
 
 export const Burger = ({ ingredients }) => {
-    // Transform ingredient from object to array
+    //  Transform ingredient from object to array
+    //  Logic from academind course
     let formatIngredients = Object.keys(ingredients)
         .map(igKey => {
             return [...Array(ingredients[igKey])].map((_, i) => {
@@ -14,11 +15,11 @@ export const Burger = ({ ingredients }) => {
         }, [])
 
     if (formatIngredients.length === 0) {
-        formatIngredients = <p className='text-base text-blue-100'>Add some ingredients!</p>
+        formatIngredients = <p className='text-base text-gray-700 select-none'>Add some ingredients!</p>
     }
 
     return (
-        <div className="flex flex-col items-center">
+        <div className='w-full max-w-sm h-64 p-5 overflow-auto text-center bg-blue-200 rounded-lg'>
             <Ingredient type='bread-top' />
             {formatIngredients}
             <Ingredient type='bread-bottom' />

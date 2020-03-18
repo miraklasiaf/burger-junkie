@@ -4,7 +4,8 @@ import axios from 'axios'
 
 // Initial state
 const initialState = {
-  ingredients: [],
+  ingredients: null,
+  totalPrice: 5000,
   orders: [],
   token: null,
   userId: null,
@@ -20,53 +21,23 @@ export const GlobalContext = createContext(initialState)
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
-  // Actions
+  /* 
+   *  Burger Actions
+   */
   async function getIngredients() {
     try {
       const res = (await axios.get('https://burger-junkie.firebaseio.com/ingredients.json')).data
       dispatch({type: 'SET_INGREDIENTS', payload: res })
     } catch (err) {
-      dispatch({type: 'SET_INGREDIENTS_ERROR', payload: err.response.data.error })
+      dispatch({type: 'SET_INGREDIENTS_ERROR', payload: err})
     }
   }
+  const addIngredient = ingredient => dispatch({type: 'ADD_INGREDIENT', payload: ingredient})
+  const deleteIngredient = ingredient => dispatch({type: 'DELETE_INGREDIENT', payload: ingredient})
 
-  async function deleteTransaction(id) {
-    try {
-      await axios.delete(`/api/v1/transactions/${id}`)
-
-      dispatch({
-        type: 'DELETE_TRANSACTION',
-        payload: id,
-      })
-    } catch (err) {
-      dispatch({
-        type: 'TRANSACTION_ERROR',
-        payload: err.response.data.error,
-      })
-    }
-  }
-
-  async function addTransaction(transaction) {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-
-    try {
-      const res = await axios.post('/api/v1/transactions', transaction, config)
-
-      dispatch({
-        type: 'ADD_TRANSACTION',
-        payload: res.data.data,
-      })
-    } catch (err) {
-      dispatch({
-        type: 'TRANSACTION_ERROR',
-        payload: err.response.data.error,
-      })
-    }
-  }
+  /*
+   *  Auth Actions
+   */
 
   return (
     <GlobalContext.Provider
@@ -77,9 +48,10 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         token: state.token,
         userId: state.userId,
+        price: state.totalPrice,
         getIngredients,
-        deleteTransaction,
-        addTransaction,
+        addIngredient,
+        deleteIngredient
       }}
     >
       {children}
