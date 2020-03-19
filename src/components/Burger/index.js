@@ -15,7 +15,7 @@ export const Burger = ({ ingredients }) => {
         }, [])
 
     if (formatIngredients.length === 0) {
-        formatIngredients = <p className='text-base text-gray-700 select-none'>Add some ingredients!</p>
+        formatIngredients = <p className='text-sm sm:text-base text-blue-900 select-none'>Add some ingredients!</p>
     }
 
     return (

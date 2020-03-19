@@ -25,7 +25,7 @@ export default (state, action) => {
           ...state.ingredients,
           [action.payload]: state.ingredients[action.payload] + 1
         },
-        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.payload],
+        price: state.price + INGREDIENT_PRICES[action.payload],
     }
     case 'DELETE_INGREDIENT':
       return {
@@ -34,8 +34,13 @@ export default (state, action) => {
           ...state.ingredients,
           [action.payload]: state.ingredients[action.payload] - 1
         },
-        totalPrice: state.totalPrice - INGREDIENT_PRICES[action.payload]
+        price: state.price - INGREDIENT_PRICES[action.payload]
       }
-    default: throw new Error()
+    case 'SET_SIDENAV':
+      return {
+        ...state,
+        isSidenavActive: action.payload
+      }
+    default: throw new Error(`Unhandled action type: ${action.type}`)
   }
 }

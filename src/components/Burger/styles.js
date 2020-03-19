@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 
 export const BreadTop = styled.div`
-  height: 50px;
-  width: 220px;
+  height: 25%;
+  width: 65%;
   background: linear-gradient(#bc581e, #e27b36);
   border-radius: 50% 50% 0 0;
   box-shadow: inset -15px 0 #c15711;
@@ -75,8 +75,8 @@ export const Seed2 = styled.div`
 `
 
 export const BreadBottom = styled.div`
-  height: 40px;
-  width: 220px;
+  height: 17%;
+  width: 65%;
   background: linear-gradient(#F08E4A, #e27b36);
   border-radius: 0 0 30px 30px;
   box-shadow: inset -15px 0 #c15711;
@@ -84,7 +84,7 @@ export const BreadBottom = styled.div`
 `
 
 export const Meat = styled.div`
-  width: 220px;
+  width: 65%;
   height: 8%;
   background: linear-gradient(#7f3608, #702e05);
   margin: 1% auto;
@@ -92,7 +92,7 @@ export const Meat = styled.div`
 `
 
 export const Salad = styled.div`
-  width: 230px;
+  width: 70%;
   height: 7%;
   margin: 1% auto;
   background: linear-gradient(#228c1d, #91ce50);
@@ -100,7 +100,7 @@ export const Salad = styled.div`
 `
 
 export const Cheese = styled.div`
-  width: 240px;
+  width: 75%;
   height: 4.5%;
   margin: 1% auto;
   background: linear-gradient(#f4d004, #d6bb22);
@@ -108,7 +108,7 @@ export const Cheese = styled.div`
 `
 
 export const Bacon = styled.div`
-  width: 220px;
+  width: 65%;
   height: 3%;
   background: linear-gradient(#bf3813, #c45e38);
   margin: 1% auto;

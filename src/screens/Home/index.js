@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Burger } from '../../components/Burger'
 import { Menu } from '../../components/Menu'
-import { GlobalContext } from '../../context/GlobalState'
+import { useBurgerContext } from '../../context/GlobalState'
 
 export default function Home() {
-    const { ingredients, error, getIngredients } = useContext(GlobalContext)
+    const { ingredients, error, getIngredients } = useBurgerContext()
     
     useEffect(() => {
       getIngredients()
@@ -23,8 +23,8 @@ export default function Home() {
     }
 
     return (
-      <div className="bg-blue-100 h-full flex flex-col items-center justify-center px-5 pt-1 pb-6 border-context lg:flex-row">
-        <h1 className='text-center text-blue-900 text-lg'>The Best Burger in town!</h1>
+      <div className="bg-blue-100 h-full flex flex-col items-center justify-center px-5 pt-1 pb-6 border-context">
+        <h1 className='text-center text-blue-900 text-md sm:text-xl'>The Best Burger in town!</h1>
         {burger}
       </div>
     )

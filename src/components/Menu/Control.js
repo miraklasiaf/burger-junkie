@@ -16,7 +16,7 @@ export default function Control(props) {
         >
           <FaMinus />
         </button>
-        <p className='bg-blue-400 w-32 text-blue-900 select-none text-center'>
+        <p className='bg-blue-300 w-32 text-blue-900 select-none text-center'>
           {props.label}
         </p>
         <button

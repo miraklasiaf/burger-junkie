@@ -1,6 +1,6 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import Control from './Control'
-import { GlobalContext } from '../../context/GlobalState'
+import { useBurgerContext } from '../../context/GlobalState'
 
 const types = [
     {name: 'Salad', label: 'salad'},
@@ -10,7 +10,7 @@ const types = [
 ]
 
 export const Menu = () => {
-    const { ingredients, price, addIngredient, deleteIngredient } = useContext(GlobalContext)
+    const { ingredients, price, addIngredient, deleteIngredient } = useBurgerContext()
     const disabledButton = { ...ingredients }
 
     for (let key in disabledButton) {
@@ -18,7 +18,7 @@ export const Menu = () => {
     }
 
     return (
-      <div className="bg-blue-200 w-full max-w-sm flex flex-col justify-center p-5 border-content rounded-lg mt-2 lg:mt-0">
+      <div className="bg-blue-200 w-full max-w-sm flex flex-col justify-center p-5 border-content rounded-lg mt-2">
         <p className="text-center text-blue-900 pb-6 font-bold select-none">
           Price: <span className="text-blue-700">Rp. {price}</span>
         </p>
