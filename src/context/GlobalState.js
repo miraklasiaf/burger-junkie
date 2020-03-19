@@ -1,60 +1,71 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useContext } from 'react'
 import AppReducer from './AppReducer'
 import axios from 'axios'
 
 // Initial state
 const initialState = {
-  ingredients: null,
-  totalPrice: 5000,
-  orders: [],
-  token: null,
-  userId: null,
+  isSidenavActive: false,
   error: null,
   loading: true,
-  authRedirectPath: '/'
+}
+
+const stateBurger = {
+  ingredients: null,
+  price: 5000,
+  error: null,
+  loading: true,
 }
 
 // Create context
-export const GlobalContext = createContext(initialState)
+export const GlobalStateContext = createContext()
+export const GlobalDispatchContext = createContext()
+export const BurgerContext = createContext()
 
 // Provider component
-export const GlobalProvider = ({ children }) => {
+export const GlobalProvider = ({children}) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
-  /* 
-   *  Burger Actions
-   */
-  async function getIngredients() {
-    try {
-      const res = (await axios.get('https://burger-junkie.firebaseio.com/ingredients.json')).data
-      dispatch({type: 'SET_INGREDIENTS', payload: res })
-    } catch (err) {
-      dispatch({type: 'SET_INGREDIENTS_ERROR', payload: err})
-    }
-  }
-  const addIngredient = ingredient => dispatch({type: 'ADD_INGREDIENT', payload: ingredient})
-  const deleteIngredient = ingredient => dispatch({type: 'DELETE_INGREDIENT', payload: ingredient})
-
-  /*
-   *  Auth Actions
-   */
+  const setSidenav = (isActive) => dispatch({type: 'SET_SIDENAV', payload: isActive})
 
   return (
-    <GlobalContext.Provider
-      value={{
-        ingredients: state.ingredients,
-        orders: state.orders,
-        error: state.error,
-        loading: state.loading,
-        token: state.token,
-        userId: state.userId,
-        price: state.totalPrice,
-        getIngredients,
-        addIngredient,
-        deleteIngredient
-      }}
-    >
-      {children}
-    </GlobalContext.Provider>
+    <GlobalStateContext.Provider value={state}>
+      <GlobalDispatchContext.Provider value={{ setSidenav }}>
+        {children}
+      </GlobalDispatchContext.Provider>
+    </GlobalStateContext.Provider>
   )
 }
+
+export const BurgerProvider = ({children}) => {
+  const [{ingredients, price, error, loading}, dispatch] = useReducer(AppReducer, stateBurger)
+
+  const getIngredients = async () => {
+    try {
+      const res = (await axios.get('https://burger-junkie.firebaseio.com/ingredients.json')).data
+      dispatch({ type: 'SET_INGREDIENTS', payload: res })
+    } catch (err) {
+      dispatch({ type: 'SET_INGREDIENTS_ERROR', payload: err })
+    }
+  }
+  const addIngredient = ingredient => dispatch({ type: 'ADD_INGREDIENT', payload: ingredient })
+  const deleteIngredient = ingredient => dispatch({ type: 'DELETE_INGREDIENT', payload: ingredient })
+
+  return (
+    <BurgerContext.Provider value={{
+      ingredients,
+      price,
+      error,
+      loading,
+      getIngredients, 
+      addIngredient, 
+      deleteIngredient 
+    }}>
+        {children}
+    </BurgerContext.Provider>
+  )
+}
+
+export const useGlobalState = () => useContext(GlobalStateContext)
+export const useGlobalDispatch = () => useContext(GlobalDispatchContext)
+
+export const useBurgerContext = () => useContext(BurgerContext)
