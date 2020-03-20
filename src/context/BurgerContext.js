@@ -1,13 +1,14 @@
 import React, { createContext, useReducer, useContext } from 'react'
-import AppReducer from './AppReducer'
+import burgerReducer from './reducers/burger'
 import axios from 'axios'
 
 // Initial state
-const stateBurger = {
+const initialState = {
     ingredients: null,
     price: 5000,
     error: null,
     loading: true,
+    makingBurger: false
 }
 
 // Create context
@@ -15,7 +16,7 @@ export const BurgerContext = createContext()
 
 // Provider component
 export const BurgerProvider = ({ children }) => {
-    const [{ ingredients, price, error, loading }, dispatch] = useReducer(AppReducer, stateBurger)
+    const [{ ingredients, price, error, loading }, dispatch] = useReducer(burgerReducer, initialState)
 
     const getIngredients = async () => {
         try {

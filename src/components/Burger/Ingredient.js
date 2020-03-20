@@ -9,7 +9,7 @@ export default function Ingredient({ type }) {
             ingredient = <BreadBottom />
             break
         case 'bread-top':
-            ingredient = <BreadTop ><Seed1 /><Seed2 /></BreadTop>
+            ingredient = <BreadTop><Seed1 /><Seed2 /></BreadTop>
             break
         case 'meat':
             ingredient = <Meat />

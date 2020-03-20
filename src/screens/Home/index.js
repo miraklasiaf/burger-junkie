@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Burger } from '../../components/Burger'
 import { Menu } from '../../components/Menu'
-import { useBurgerContext } from '../../context/GlobalState'
+import { useBurgerContext } from '../../context/BurgerContext'
 
 export default function Home() {
     const { ingredients, error, getIngredients } = useBurgerContext()

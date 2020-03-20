@@ -1,6 +1,6 @@
 import React from 'react'
-import Nav from './Nav'
-import Sidenav from './Nav/Sidenav'
+import Toolbar from './Navigation/Toolbar'
+import Sidebar from './Navigation/Sidebar'
 import Footer from './Footer'
 import {AppHeader, AppMain, MainWrapper, AppFooter} from './styles'
 
@@ -8,10 +8,10 @@ export default function Layout({children}) {
     return (
         <>
             <AppHeader>
-                <Nav />
+                <Toolbar />
             </AppHeader>
 
-            <Sidenav />
+            <Sidebar />
 
             <AppMain>
                 <MainWrapper>

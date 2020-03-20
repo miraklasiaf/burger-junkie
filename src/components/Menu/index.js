@@ -1,6 +1,6 @@
 import React from 'react'
 import Control from './Control'
-import { useBurgerContext } from '../../context/GlobalState'
+import { useBurgerContext } from '../../context/BurgerContext'
 
 const types = [
     {name: 'Salad', label: 'salad'},
