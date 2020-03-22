@@ -3,8 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App'
 import * as serviceWorker from './utils/serviceWorker';
+import { GlobalProvider } from './context/GlobalState'
+import { BurgerProvider } from './context/BurgerContext'
+import { AuthProvider } from './context/AuthContext'
 
-const ui = <App />
+const ui = (
+  <GlobalProvider>
+    <BurgerProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BurgerProvider>
+  </GlobalProvider>
+)
 const container = document.getElementById('root')
 
 if (process.env.NODE_ENV !== 'production') {

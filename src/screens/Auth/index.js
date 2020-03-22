@@ -3,12 +3,12 @@ import { validation } from './validation'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useAuthContext } from '../../context/AuthContext'
 import { useBurgerContext } from '../../context/BurgerContext'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from '@reach/router'
 
 export default function Auth() {
   const [isSignup, setIsSignup] = useState(true)
   const { makingBurger } = useBurgerContext()
-  const { loggedIn, redirectPath, authentication, redirectAuth, error } = useAuthContext()
+  const { token, redirectPath, authentication, redirectAuth, error } = useAuthContext()
 
   useEffect(() => {
     if (!makingBurger && redirectPath !== '/') {
@@ -24,8 +24,8 @@ export default function Auth() {
   }
 
   let redirect = null
-  if(loggedIn){
-    redirect = <Redirect to={redirectPath} />
+  if(token !== null){
+    redirect = <Redirect to={redirectPath} noThrow />
   }
 
   return (

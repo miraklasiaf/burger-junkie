@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import React, { createContext, useReducer, useContext, useCallback } from 'react'
 import authReducer from './reducers/auth'
 import axios from 'axios'
 
@@ -41,18 +41,18 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('expirationDate', expirationDate)
             localStorage.setItem('token', res.idToken)
             localStorage.setItem('userId', res.localId)
-            dispatch({type: 'AUTH_SUCCESS', idToken: res.idToken, userId: res.localId})
+            dispatch({type: 'AUTH_SUCCESS', payload: {idToken: res.idToken, userId: res.localId} })
             createTimeout(res.expiresIn)
         } catch (err) {
             dispatch({type: 'AUTH_FAILED', error: err.response.data.error})
         }
     }
 
-    const createTimeout = (expirationTime) => {
+    const createTimeout = useCallback((expirationTime) => {
         setTimeout(() => {
             logout()
         }, expirationTime * 1000);
-    }
+    }, [])
 
     const logout = () => {
         localStorage.removeItem('token')
@@ -63,18 +63,17 @@ export const AuthProvider = ({children}) => {
 
     const redirectAuth = path => dispatch({type: 'AUTH_REDIRECT', payload: path})
     
-    const checkAuthState = () => {
-        const idToken = localStorage.getItem('token')
+    const checkAuthState = useCallback(() => {
+        const token = localStorage.getItem('token')
         const expirationDate = new Date(localStorage.getItem('expirationDate'))
         if (token && (expirationDate > new Date())) {
             const userId = localStorage.getItem('userId')
-            dispatch({type:'AUTH_SUCCESS', idToken, userId})
+            dispatch({type:'AUTH_SUCCESS', payload: {idToken: token, userId}})
             createTimeout((expirationDate.getTime() - new Date().getTime()) / 1000)
         } else {
             logout()
         }
-    }
-
+    }, [dispatch, createTimeout])
 
     return (
         <AuthContext.Provider value={{

@@ -8,8 +8,7 @@ export default function Home() {
     
     useEffect(() => {
       getIngredients()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [getIngredients])
 
     let burger = error ? <p className="text-center text-blue-900">Ingredients can't be loaded</p> : <p>Loading...</p>
 

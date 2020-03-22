@@ -8,8 +8,8 @@ export default (state, action) => {
         case 'AUTH_SUCCESS': 
           return {
             ...state,
-            token: action.idToken,
-            userId: action.userId,
+            token: action.payload.idToken,
+            userId: action.payload.userId,
             loading: false
           }
         case 'AUTH_FAILED': 

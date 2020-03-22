@@ -20,7 +20,7 @@ export const Menu = () => {
     return (
       <div className="bg-blue-200 w-full max-w-sm flex flex-col justify-center p-5 border-content rounded-lg mt-2">
         <p className="text-center text-blue-900 pb-6 font-bold select-none">
-          Price: <span className="text-blue-700">Rp. {price}</span>
+          Price: <span className="text-blue-800">Rp. {price}</span>
         </p>
         {types.map(types => (
           <Control
@@ -32,7 +32,7 @@ export const Menu = () => {
           />
         ))}
         <div className="flex justify-center pt-2">
-          <button className="bg-blue-600 rounded-lg px-3 py-2 text-blue-100 text-sm">
+          <button className="bg-blue-700 rounded-lg px-3 py-2 text-blue-100 text-sm">
             ORDER NOW
           </button>
         </div>
