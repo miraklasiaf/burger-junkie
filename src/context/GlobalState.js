@@ -3,7 +3,8 @@ import uiReducer from './reducers/ui'
 
 // Initial state
 const initialState = {
-  isSidebarActive: false,
+  isSidebarOpen: false,
+  isModalOpen: false,
   error: null,
   loading: true,
 }
@@ -13,12 +14,13 @@ export const GlobalContext = createContext()
 
 // Provider component
 export const GlobalProvider = ({children}) => {
-  const [{isSidebarActive}, dispatch] = useReducer(uiReducer, initialState)
+  const [{isSidebarOpen, isModalOpen}, dispatch] = useReducer(uiReducer, initialState)
 
   const setSidebar = (isActive) => dispatch({type: 'SET_SIDEBAR', payload: isActive})
+  const setModal = (isActive) => dispatch({ type: 'SET_MODAL', payload: isActive })
 
   return (
-    <GlobalContext.Provider value={{isSidebarActive, setSidebar}}>
+    <GlobalContext.Provider value={{isSidebarOpen, isModalOpen, setModal, setSidebar}}>
         {children}
     </GlobalContext.Provider>
   )

@@ -9,8 +9,9 @@ const types = [
     {name: 'Meat', label: 'meat'}
 ]
 
-export const Menu = () => {
+export const Menu = ({setModal}) => {
     const { ingredients, price, addIngredient, deleteIngredient } = useBurgerContext()
+
     const disabledButton = { ...ingredients }
 
     for (let key in disabledButton) {
@@ -32,7 +33,7 @@ export const Menu = () => {
           />
         ))}
         <div className="flex justify-center pt-2">
-          <button className="bg-blue-700 rounded-lg px-3 py-2 text-blue-100 text-sm">
+          <button className="bg-blue-700 rounded-lg px-3 py-2 text-blue-100 text-sm" onClick={setModal}>
             ORDER NOW
           </button>
         </div>

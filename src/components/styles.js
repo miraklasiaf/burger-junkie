@@ -15,7 +15,7 @@ export const AppMain = tw.main`
 `
 
 export const MainWrapper = tw.div`
-  bg-black w-full max-w-screen-xl
+  w-full max-w-screen-xl
 `
 
 /*
