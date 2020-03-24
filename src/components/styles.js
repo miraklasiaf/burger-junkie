@@ -22,7 +22,6 @@ export const MainWrapper = tw.div`
  * Sidenav
  */
 
-
 /*
  * Footer Section
  */

@@ -11,21 +11,25 @@ import {
 } from './styles'
 import '../../assets/custom-utilities.css'
 import { NavItem } from './NavItem'
-import { useGlobalContext } from '../../context/GlobalState'
+import { useSidebarContext } from '../../context/SidebarContext'
 
 export default function Toolbar () {
-  const { setSidebar } = useGlobalContext()
+  const { setSidebar } = useSidebarContext()
+
+  const handleSidebarOpen = () => {
+    setSidebar(true)
+  }
 
   return (
     <HeaderWrapper>
       <HeaderContainer>
         <LeftSection>
-          <GiHamburger className="sm:hidden h-8 w-8" />
-          <p className="hidden sm:block select-none">Burger Junkie</p>
+          <GiHamburger className='sm:hidden h-8 w-8' />
+          <p className='hidden sm:block select-none'>Burger Junkie</p>
         </LeftSection>
         <MidSection>
-          <NavLink to="/">
-            <GiHamburger className="spin" />
+          <NavLink to='/'>
+            <GiHamburger className='spin' />
           </NavLink>
         </MidSection>
         <RightSection>
@@ -33,11 +37,11 @@ export default function Toolbar () {
             <NavItem />
           </Navigation>
         </RightSection>
-        <div className="text-blue-100 hover:text-blue-400 sm:hidden" onClick={() => setSidebar(true)}>
-          <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <div className='text-blue-100 hover:text-blue-400 sm:hidden' onClick={handleSidebarOpen}>
+          <svg className='w-6 h-6 fill-current' viewBox='0 0 24 24'>
             <path
-              fillRule="evenodd"
-              d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+              fillRule='evenodd'
+              d='M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z'
             />
           </svg>
         </div>

@@ -3,11 +3,11 @@ import { Redirect } from '@reach/router'
 import { useAuthContext } from '../../context/AuthContext'
 
 export default function Logout () {
-    const { logout } = useAuthContext()
+  const { logout } = useAuthContext()
 
-    useEffect(() => {
-        logout()
-    }, [logout])
+  useEffect(() => {
+    logout()
+  }, [logout])
 
-    return <Redirect to="/" noThrow />
+  return <Redirect to='/' noThrow />
 }

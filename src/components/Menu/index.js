@@ -1,42 +1,54 @@
 import React from 'react'
 import Control from './Control'
-import { useBurgerContext } from '../../context/BurgerContext'
+import { useBurgerState, useBurgerDispatch } from '../../context/BurgerContext'
+import { useAuthContext } from '../../context/AuthContext'
+import { MenuContainer, ButtonWrapper, PriceWrapper } from './styles'
 
 const types = [
-    {name: 'Salad', label: 'salad'},
-    {name: 'Bacon', label: 'bacon'},
-    {name: 'Cheese', label: 'cheese'},
-    {name: 'Meat', label: 'meat'}
+  { name: 'Salad', label: 'salad' },
+  { name: 'Bacon', label: 'bacon' },
+  { name: 'Cheese', label: 'cheese' },
+  { name: 'Meat', label: 'meat' }
 ]
 
-export const Menu = ({setModal}) => {
-    const { ingredients, price, addIngredient, deleteIngredient } = useBurgerContext()
+export const Menu = ({ purchase, isPurchasable }) => {
+  const { ingredients, price } = useBurgerState()
+  const { addIngredient, deleteIngredient } = useBurgerDispatch()
+  const { loggedIn } = useAuthContext()
 
-    const disabledButton = { ...ingredients }
+  const disabledButton = { ...ingredients }
 
-    for (let key in disabledButton) {
-      disabledButton[key] = disabledButton[key] <= 0
-    }
+  for (const key in disabledButton) {
+    disabledButton[key] = disabledButton[key] <= 0
+  }
 
-    return (
-      <div className="bg-blue-200 w-full max-w-sm flex flex-col justify-center p-5 border-content rounded-lg mt-2">
-        <p className="text-center text-blue-900 pb-6 font-bold select-none">
-          Price: <span className="text-blue-800">Rp. {price}</span>
-        </p>
-        {types.map(types => (
-          <Control
-            key={types.name}
-            label={types.name}
-            add={() => addIngredient(types.label)}
-            delete={() => deleteIngredient(types.label)}
-            disabled={disabledButton[types.label]}
-          />
-        ))}
-        <div className="flex justify-center pt-2">
-          <button className="bg-blue-700 rounded-lg px-3 py-2 text-blue-100 text-sm" onClick={setModal}>
-            ORDER NOW
-          </button>
-        </div>
-      </div>
-    )
+  return (
+    <MenuContainer>
+      <PriceWrapper>
+          Price: <span className='text-blue-800'>Rp. {price}</span>
+      </PriceWrapper>
+
+      {types.map(types => (
+        <Control
+          key={types.name}
+          label={types.name}
+          add={() => addIngredient(types.label)}
+          remove={() => deleteIngredient(types.label)}
+          disabled={disabledButton[types.label]}
+        />
+      ))}
+
+      <ButtonWrapper>
+        <button
+          className={isPurchasable
+            ? 'bg-blue-700 rounded-lg px-3 py-2 text-blue-100 text-sm'
+            : 'bg-blue-700 rounded-lg px-3 py-2 text-blue-500 text-sm cursor-not-allowed'}
+          onClick={purchase}
+          disabled={!isPurchasable}
+        >
+          {loggedIn ? 'ORDER NOW' : 'Sign Up to Order'}
+        </button>
+      </ButtonWrapper>
+    </MenuContainer>
+  )
 }
