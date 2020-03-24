@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
       }
 
       const res = (await axios.post(url, authData)).data
-      console.log(res)
 
       const expirationDate = new Date(new Date().getTime() + (res.expiresIn * 1000))
       localStorage.setItem('expirationDate', expirationDate)
