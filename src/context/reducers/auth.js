@@ -3,7 +3,7 @@ export default (state, action) => {
     case 'AUTH_START':
       return {
         ...state,
-        loading: action.paylaod
+        loading: action.payload
       }
     case 'AUTH_SUCCESS':
       return {
@@ -15,7 +15,7 @@ export default (state, action) => {
     case 'AUTH_FAILED':
       return {
         ...state,
-        error: action.error,
+        error: action.payload,
         loading: false
       }
     case 'AUTH_LOGOUT':

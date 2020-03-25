@@ -11,6 +11,7 @@ export default (state, action) => {
       return {
         ...state,
         ingredients: action.payload,
+        price: 5000,
         loading: false
       }
     case 'SET_INGREDIENTS_ERROR':

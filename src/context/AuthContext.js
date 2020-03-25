@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useContext, useCallback } from 'react'
 import authReducer from './reducers/auth'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
 // Initial state
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
 }
 
 // Create context
-export const AuthContext = createContext()
+export const AuthStateContext = createContext()
+export const AuthDispatchContext = createContext()
 
 // Provider component
 export const AuthProvider = ({ children }) => {
@@ -43,7 +45,7 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: 'AUTH_SUCCESS', payload: { idToken: res.idToken, userId: res.localId } })
       createTimeout(res.expiresIn)
     } catch (err) {
-      dispatch({ type: 'AUTH_FAILED', error: err.response.data.error })
+      dispatch({ type: 'AUTH_FAILED', payload: err.response.data.error })
     }
   }
 
@@ -75,22 +77,31 @@ export const AuthProvider = ({ children }) => {
   }, [dispatch, createTimeout])
 
   return (
-    <AuthContext.Provider value={{
+    <AuthStateContext.Provider value={{
       token,
       userId,
       error,
       loading,
       redirectPath,
-      loggedIn: token !== null,
-      authentication,
-      redirectAuth,
-      logout,
-      checkAuthState
+      loggedIn: token !== null
     }}
     >
-      {children}
-    </AuthContext.Provider>
+      <AuthDispatchContext.Provider value={{
+        authentication,
+        redirectAuth,
+        logout,
+        checkAuthState
+      }}
+      >
+        {children}
+      </AuthDispatchContext.Provider>
+    </AuthStateContext.Provider>
   )
 }
 
-export const useAuthContext = () => useContext(AuthContext)
+export const useAuthState = () => useContext(AuthStateContext)
+export const useAuthDispatch = () => useContext(AuthDispatchContext)
+
+AuthProvider.propTypes = {
+  children: PropTypes.node
+}

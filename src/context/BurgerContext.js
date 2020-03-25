@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useContext, useCallback } from 'react'
-import burgerReducer from './reducers/burger'
+import reducer from './reducers/burger'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
 // Initial state
 const initialState = {
@@ -17,7 +18,7 @@ export const BurgerDispatchContext = createContext()
 
 // Provider component
 export const BurgerProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(burgerReducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const getIngredients = useCallback(async () => {
     try {
@@ -54,4 +55,8 @@ export const useBurgerDispatch = () => {
     throw new Error('useBurgerDispatch must be used within a BurgerProvider')
   }
   return context
+}
+
+BurgerProvider.propTypes = {
+  children: PropTypes.node
 }

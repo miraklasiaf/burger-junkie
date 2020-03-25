@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useContext } from 'react'
+import PropTypes from 'prop-types'
 
 // Create context
 export const SidebarContext = createContext()
@@ -33,3 +34,7 @@ export const SidebarProvider = ({ children }) => {
 }
 
 export const useSidebarContext = () => useContext(SidebarContext)
+
+SidebarProvider.propTypes = {
+  children: PropTypes.node
+}
