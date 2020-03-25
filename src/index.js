@@ -4,10 +4,19 @@ import './index.css'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import { AuthProvider } from './context/AuthContext'
+import { OrderProvider } from './context/OrderContext'
+import { BurgerProvider } from './context/BurgerContext'
+import { SidebarProvider } from './context/SidebarContext'
 
 const ui = (
   <AuthProvider>
-    <App />
+    <SidebarProvider>
+      <BurgerProvider>
+        <OrderProvider>
+          <App />
+        </OrderProvider>
+      </BurgerProvider>
+    </SidebarProvider>
   </AuthProvider>
 )
 const container = document.getElementById('root')

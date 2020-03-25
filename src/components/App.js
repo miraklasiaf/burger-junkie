@@ -9,13 +9,12 @@ import Logout from '../screens/Auth/Logout'
 import Toolbar from './Navigation/Toolbar'
 import Sidebar from './Navigation/Sidebar'
 import Footer from './Footer'
-import { useAuthContext } from '../context/AuthContext'
-import { BurgerProvider } from '../context/BurgerContext'
-import { SidebarProvider } from '../context/SidebarContext'
+import { useAuthState, useAuthDispatch } from '../context/AuthContext'
 import { AppHeader, AppMain, MainWrapper, AppFooter } from './styles'
 
 export default function App () {
-  const { loggedIn, checkAuthState } = useAuthContext()
+  const { loggedIn } = useAuthState()
+  const { checkAuthState } = useAuthDispatch()
 
   useEffect(() => {
     checkAuthState()
@@ -23,28 +22,24 @@ export default function App () {
 
   return (
     <>
-      <SidebarProvider>
-        <AppHeader>
-          <Toolbar />
-        </AppHeader>
+      <AppHeader>
+        <Toolbar />
+      </AppHeader>
 
-        <Sidebar />
-      </SidebarProvider>
+      <Sidebar />
 
-      <BurgerProvider>
-        <AppMain>
-          <MainWrapper>
-            <Router>
-              <Home path='/' />
-              <Auth path='/auth' />
-              {loggedIn && <Order path='/order' />}
-              {loggedIn && <Checkout path='/checkout' />}
-              {loggedIn && <Logout path='logout' />}
-              <NotFound default />
-            </Router>
-          </MainWrapper>
-        </AppMain>
-      </BurgerProvider>
+      <AppMain>
+        <MainWrapper>
+          <Router>
+            <Home path='/' />
+            <Auth path='/auth' />
+            {loggedIn && <Order path='/order' />}
+            {loggedIn && <Checkout path='/checkout' />}
+            {loggedIn && <Logout path='logout' />}
+            <NotFound default />
+          </Router>
+        </MainWrapper>
+      </AppMain>
 
       <AppFooter>
         <Footer />
