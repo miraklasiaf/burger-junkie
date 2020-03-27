@@ -12,15 +12,21 @@ export default function Sidebar () {
     setSidebar(false)
   }
 
+  let transitionClass = 'transform -translate-x-full transition duration-500 ease-out'
+  if (isSidebarOpen) {
+    transitionClass = 'transform translate-x-0 transition duration-500 ease-out'
+  }
+
   return (
     <>
       <Backdrop isActive={isSidebarOpen} removeBackdrop={handleSidebarClose} />
       <div
-        role='navigation'
-        className={isSidebarOpen
-          ? 'fixed h-full w-3/4 top-0 z-50 bg-blue-900 transfrom translate-x-0 transition duration-500 ease-out'
-          : 'fixed h-full w-3/4 top-0 z-50 bg-blue-900 transform -translate-x-full transition duration-500 ease-out'}
+        role='button'
+        aria-label='navigation'
+        tabIndex='0'
+        className={`fixed h-full w-3/4 top-0 z-50 bg-blue-900 ${transitionClass}`}
         onClick={handleSidebarClose}
+        onKeyPress={handleSidebarClose}
       >
         <div className='flex items-center justify-evenly h-16 text-blue-200 border-b'>
           <p>Burger</p>

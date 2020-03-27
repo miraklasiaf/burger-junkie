@@ -5,7 +5,7 @@ import CheckoutSummary from './CheckoutSummary'
 import { useBurgerState } from '../../context/BurgerContext'
 import { useOrderState } from '../../context/OrderContext'
 
-export default function Checkout ({ navigate }) {
+export default function Checkout ({ navigate, children }) {
   const { ingredients } = useBurgerState()
   const { purchased } = useOrderState()
 
@@ -33,6 +33,7 @@ export default function Checkout ({ navigate }) {
           cancel={handleCancel}
           checkout={handleCheckout}
         />
+        {children}
       </>
     )
   }
@@ -48,5 +49,6 @@ export default function Checkout ({ navigate }) {
 }
 
 Checkout.propTypes = {
-  navigate: PropTypes.func
+  navigate: PropTypes.func,
+  children: PropTypes.node
 }

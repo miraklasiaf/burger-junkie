@@ -37,7 +37,14 @@ export default function Toolbar () {
             <NavItem />
           </Navigation>
         </RightSection>
-        <div className='text-blue-100 hover:text-blue-400 sm:hidden' onClick={handleSidebarOpen}>
+        <div
+          role='button'
+          tabIndex='0'
+          className='text-blue-100 hover:text-blue-400 sm:hidden'
+          onClick={handleSidebarOpen}
+          onKeyPress={handleSidebarOpen}
+          aria-label='hamburger button'
+        >
           <svg className='w-6 h-6 fill-current' viewBox='0 0 24 24'>
             <path
               fillRule='evenodd'

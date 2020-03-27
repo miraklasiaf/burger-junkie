@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const OrderSummary = ({ ingredients, price }) => {
   const ingredientSummary = Object.keys(ingredients)
@@ -21,4 +22,9 @@ export const OrderSummary = ({ ingredients, price }) => {
       <p className='font-bold mt-2 text-gray-700'>Total Price: Rp {price} </p>
     </>
   )
+}
+
+OrderSummary.propTypes = {
+  ingredients: PropTypes.object.isRequired,
+  price: PropTypes.number.isRequired
 }

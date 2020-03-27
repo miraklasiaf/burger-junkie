@@ -1,8 +1,9 @@
 import React from 'react'
 import Control from './Control'
 import { useBurgerState, useBurgerDispatch } from '../../context/BurgerContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthState } from '../../context/AuthContext'
 import { MenuContainer, ButtonWrapper, PriceWrapper } from './styles'
+import PropTypes from 'prop-types'
 
 const types = [
   { name: 'Salad', label: 'salad' },
@@ -14,7 +15,7 @@ const types = [
 export const Menu = ({ purchase, isPurchasable }) => {
   const { ingredients, price } = useBurgerState()
   const { addIngredient, deleteIngredient } = useBurgerDispatch()
-  const { loggedIn } = useAuthContext()
+  const { loggedIn } = useAuthState()
 
   const disabledButton = { ...ingredients }
 
@@ -51,4 +52,9 @@ export const Menu = ({ purchase, isPurchasable }) => {
       </ButtonWrapper>
     </MenuContainer>
   )
+}
+
+Menu.propTypes = {
+  purchase: PropTypes.func.isRequired,
+  isPurchasable: PropTypes.bool.isRequired
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink } from './styles'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthState } from '../../context/AuthContext'
 
 export const NavItem = () => {
-  const { loggedIn } = useAuthContext()
+  const { loggedIn } = useAuthState()
 
   let order = null
   let auth = <NavLink className='block flex items-center hover:text-blue-300' to='auth'>Login</NavLink>

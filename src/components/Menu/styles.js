@@ -1,5 +1,3 @@
-import objstr from 'obj-str'
-import React from 'react'
 import tw from 'tailwind.macro'
 
 export const MenuContainer = tw.div`
@@ -13,18 +11,3 @@ export const PriceWrapper = tw.p`
 export const ButtonWrapper = tw.div`
   flex justify-center pt-2
 `
-
-export const Button = ({ children, on, onToggle }) => (
-  <button
-    className={
-      'hover:underline ' +
-      objstr({
-        'text-blue-400': !on,
-        'text-green-400': on
-      })
-    }
-    onClick={() => onToggle()}
-  >
-    {children}
-  </button>
-)

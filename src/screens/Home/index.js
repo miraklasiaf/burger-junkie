@@ -5,13 +5,16 @@ import { Menu } from '../../components/Menu'
 import { Modal } from '../../components/Modal'
 import { OrderSummary } from './OrderSummary'
 import { useBurgerState, useBurgerDispatch } from '../../context/BurgerContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthState, useAuthDispatch } from '../../context/AuthContext'
+import { useOrderDispatch } from '../../context/OrderContext'
 import { MainContainer } from './styles'
 
 export default function Home () {
   const { ingredients, error, price } = useBurgerState()
   const { getIngredients } = useBurgerDispatch()
-  const { loggedIn, redirectAuth } = useAuthContext()
+  const { initPurchase } = useOrderDispatch()
+  const { loggedIn } = useAuthState()
+  const { redirectAuth } = useAuthDispatch()
   const [isModalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
@@ -43,8 +46,19 @@ export default function Home () {
     return sum > 0
   }
 
+  const handleToCheckout = () => {
+    initPurchase()
+    navigate('/checkout', {
+      state: {
+        ingredients,
+        price
+      }
+    })
+  }
+
   let burger = error ? <p className='text-center text-blue-900'>Ingredients can't be loaded</p> : <p>Loading...</p>
   let order = null
+
   if (ingredients) {
     burger = (
       <>
@@ -69,6 +83,7 @@ export default function Home () {
       <Modal
         active={isModalOpen}
         closeModal={handleModalClose}
+        checkout={handleToCheckout}
         title='Your Order'
       >
         {order}

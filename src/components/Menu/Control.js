@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { FaPlus, FaMinus } from 'react-icons/fa'
 
 export default function Control ({ remove, disabled, label, add }) {
@@ -28,4 +29,11 @@ export default function Control ({ remove, disabled, label, add }) {
       </button>
     </div>
   )
+}
+
+Control.propTypes = {
+  add: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired
 }

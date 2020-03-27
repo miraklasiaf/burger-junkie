@@ -1,5 +1,6 @@
 import React from 'react'
 import Ingredient from './Ingredient'
+import PropTypes from 'prop-types'
 
 export const Burger = ({ ingredients }) => {
   //  Transform ingredient from object to array
@@ -25,4 +26,8 @@ export const Burger = ({ ingredients }) => {
       <Ingredient type='bread-bottom' />
     </div>
   )
+}
+
+Burger.propTypes = {
+  ingredients: PropTypes.object.isRequired
 }

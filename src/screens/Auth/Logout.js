@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { Redirect } from '@reach/router'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthDispatch } from '../../context/AuthContext'
 
 export default function Logout () {
-  const { logout } = useAuthContext()
+  const { logout } = useAuthDispatch()
 
   useEffect(() => {
     logout()

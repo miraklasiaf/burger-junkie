@@ -39,9 +39,9 @@ export const AuthProvider = ({ children }) => {
       const res = (await axios.post(url, authData)).data
 
       const expirationDate = new Date(new Date().getTime() + (res.expiresIn * 1000))
-      localStorage.setItem('expirationDate', expirationDate)
-      localStorage.setItem('token', res.idToken)
-      localStorage.setItem('userId', res.localId)
+      window.localStorage.setItem('expirationDate', expirationDate)
+      window.localStorage.setItem('token', res.idToken)
+      window.localStorage.setItem('userId', res.localId)
       dispatch({ type: 'AUTH_SUCCESS', payload: { idToken: res.idToken, userId: res.localId } })
       createTimeout(res.expiresIn)
     } catch (err) {
@@ -56,19 +56,19 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('expirationDate')
-    localStorage.removeItem('userId')
+    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('expirationDate')
+    window.localStorage.removeItem('userId')
     dispatch({ type: 'AUTH_LOGOUT' })
   }
 
   const redirectAuth = path => dispatch({ type: 'AUTH_REDIRECT', payload: path })
 
   const checkAuthState = useCallback(() => {
-    const token = localStorage.getItem('token')
-    const expirationDate = new Date(localStorage.getItem('expirationDate'))
+    const token = window.localStorage.getItem('token')
+    const expirationDate = new Date(window.localStorage.getItem('expirationDate'))
     if (token && (expirationDate > new Date())) {
-      const userId = localStorage.getItem('userId')
+      const userId = window.localStorage.getItem('userId')
       dispatch({ type: 'AUTH_SUCCESS', payload: { idToken: token, userId } })
       createTimeout((expirationDate.getTime() - new Date().getTime()) / 1000)
     } else {
