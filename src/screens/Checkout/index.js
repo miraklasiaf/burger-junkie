@@ -24,7 +24,7 @@ export default function Checkout ({ navigate, children }) {
   let summary = <Redirect to='/' noThrow />
 
   if (ingredients) {
-    const redirectPurchase = purchased && <Redirect to='/' />
+    const redirectPurchase = purchased && <Redirect to='/' noThrow />
     summary = (
       <>
         {redirectPurchase}

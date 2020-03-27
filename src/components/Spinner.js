@@ -1,7 +1,9 @@
 import React from 'react'
+import logo from '../assets/logo.svg'
+import '../assets/custom-utilities.css'
 
 export default function Spinner () {
   return (
-    <div className='bg-blue-100 flex flex-col items-center justify-center px-5 pt-5 pb-56 border-context' />
+    <img src={logo} className='h-32 w-32 spin' alt='logo' />
   )
 }

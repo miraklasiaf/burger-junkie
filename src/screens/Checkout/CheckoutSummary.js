@@ -10,8 +10,8 @@ export default function CheckoutSummary ({ ingredients, cancel, checkout }) {
         <Burger ingredients={ingredients} />
       </div>
       <div className='flex mt-8'>
-        <button className='bg-red-600 rounded-lg px-3 py-2 text-blue-100 mr-3' onClick={cancel}>Cancel</button>
-        <button className='bg-blue-600 rounded-lg px-3 py-2 text-blue-100' onClick={checkout}>Continue</button>
+        <button className='bg-red-700 rounded-lg px-3 py-2 text-white mr-3' onClick={cancel}>Cancel</button>
+        <button className='bg-blue-700 rounded-lg px-3 py-2 text-white' onClick={checkout}>Continue</button>
       </div>
     </div>
   )

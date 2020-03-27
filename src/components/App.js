@@ -7,6 +7,7 @@ import Logout from '../screens/Auth/Logout'
 import Toolbar from './Navigation/Toolbar'
 import Sidebar from './Navigation/Sidebar'
 import Footer from './Footer'
+import Spinner from '../components/Spinner'
 import { useAuthState, useAuthDispatch } from '../context/AuthContext'
 import { AppHeader, AppMain, MainWrapper, AppFooter } from './styles'
 
@@ -40,7 +41,7 @@ export default function App () {
 
       <AppMain>
         <MainWrapper>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Spinner />}>
             <Router>
               <Home path='/' />
               <Auth path='/auth' />

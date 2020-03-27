@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import React, { createContext, useReducer, useContext, useCallback } from 'react'
 import reducer from './reducers/order'
 import axios from 'axios'
 import PropTypes from 'prop-types'
@@ -18,7 +18,7 @@ export const OrderDispatchContext = createContext()
 export const OrderProvider = ({ children }) => {
   const [{ orders, loading, purchased }, dispatch] = useReducer(reducer, initialState)
 
-  const getOrders = async (token, userId) => {
+  const getOrders = useCallback(async (token, userId) => {
     try {
       dispatch({ type: 'FETCH_ORDER_START' })
       const query = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
@@ -32,9 +32,10 @@ export const OrderProvider = ({ children }) => {
       }
       dispatch({ type: 'FETCH_ORDER_SUCCESS', payload: fetchOrders })
     } catch (err) {
+      console.log(err)
       dispatch({ type: 'FETCH_ORDER_FAILED', payload: err.response.data.error })
     }
-  }
+  }, [dispatch])
 
   const purchase = async (orderData, token) => {
     try {
@@ -46,7 +47,7 @@ export const OrderProvider = ({ children }) => {
       }
       dispatch({ type: 'PURCHASE_SUCCESS', payload: newOrder })
     } catch (err) {
-
+      dispatch({ type: 'PURCHASE_FAILED' })
     }
   }
 

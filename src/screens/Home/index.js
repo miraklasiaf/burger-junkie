@@ -8,6 +8,7 @@ import { useBurgerState, useBurgerDispatch } from '../../context/BurgerContext'
 import { useAuthState, useAuthDispatch } from '../../context/AuthContext'
 import { useOrderDispatch } from '../../context/OrderContext'
 import { MainContainer } from './styles'
+import Spinner from '../../components/Spinner'
 
 export default function Home () {
   const { ingredients, error, price } = useBurgerState()
@@ -56,7 +57,7 @@ export default function Home () {
     })
   }
 
-  let burger = error ? <p className='text-center text-blue-900'>Ingredients can't be loaded</p> : <p>Loading...</p>
+  let burger = error ? <p className='text-center text-blue-900'>Ingredients can't be loaded</p> : <Spinner />
   let order = null
 
   if (ingredients) {

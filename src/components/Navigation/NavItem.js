@@ -8,7 +8,7 @@ export const NavItem = () => {
   let order = null
   let auth = <NavLink className='block flex items-center hover:text-blue-300' to='auth'>Login</NavLink>
   if (loggedIn) {
-    order = <NavLink className='block flex items-center hover:text-blue-300 mr-5' to='order'>Order</NavLink>
+    order = <NavLink className='block flex items-center hover:text-blue-300 mr-5' to='order'>Order History</NavLink>
     auth = <NavLink to='logout'>Logout</NavLink>
   }
 

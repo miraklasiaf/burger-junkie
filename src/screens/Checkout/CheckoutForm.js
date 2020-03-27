@@ -6,12 +6,14 @@ import { useBurgerState } from '../../context/BurgerContext'
 import { useAuthState } from '../../context/AuthContext'
 
 const validation = Yup.object().shape({
-  password: Yup.string()
+  name: Yup.string()
     .min(4, 'Too Short!')
     .max(20, 'Too Long!')
     .required('Required'),
-  email: Yup.string()
-    .email('Invalid email')
+  zipCode: Yup.string()
+    .length(5, 'The value must 5 digit number')
+    .required('Required'),
+  address: Yup.string()
     .required('Required')
 })
 
@@ -23,7 +25,7 @@ export default function CheckoutForm () {
   return (
     <>
       <Formik
-        initialValues={{ name: '', street: '', zipCode: '', deliveryMethode: '' }}
+        initialValues={{ name: '', address: '', zipCode: '', deliveryMethod: 'Regular' }}
         validationSchema={validation}
         onSubmit={(values, { setSubmitting }) => {
           const order = {
@@ -44,33 +46,33 @@ export default function CheckoutForm () {
                 <Field className='rounded-lg py-2 px-4 w-full' id='name' type='text' name='name' />
               </div>
               <div className='absolute text-red-600 text-sm bottom-0 italic'>
-                <ErrorMessage name='email' component='div' />
+                <ErrorMessage name='name' component='div' />
               </div>
             </div>
             <div className='flex-flex-col relative pb-5'>
               <div className='flex flex-col'>
-                <label htmlFor='name' className='text-blue-900 pb-2'>Name</label>
-                <Field className='rounded-lg py-2 px-4 w-full' id='name' type='text' name='name' />
+                <label htmlFor='address' className='text-blue-900 pb-2'>Address</label>
+                <Field className='rounded-lg py-2 px-4 w-full' id='address' as='textarea' name='address' />
               </div>
               <div className='absolute text-red-600 text-sm bottom-0 italic'>
-                <ErrorMessage name='email' component='div' />
+                <ErrorMessage name='address' component='div' />
               </div>
             </div>
             <div className='flex-flex-col relative pb-5'>
               <div className='flex flex-col'>
-                <label htmlFor='name' className='text-blue-900 pb-2'>Name</label>
-                <Field className='rounded-lg py-2 px-4 w-full' id='name' type='text' name='name' />
+                <label htmlFor='zipCode' className='text-blue-900 pb-2'>ZIP Code</label>
+                <Field className='rounded-lg py-2 px-4 w-full' id='zipCode' type='text' name='zipCode' />
               </div>
               <div className='absolute text-red-600 text-sm bottom-0 italic'>
-                <ErrorMessage name='email' component='div' />
+                <ErrorMessage name='zipCode' component='div' />
               </div>
             </div>
             <div className='flex flex-col mt-2'>
-              <label htmlFor='password' className='text-blue-900 pb-2'>Password</label>
-              <Field className='rounded-lg py-2 px-4 w-full' type='password' name='password' id='password' autoComplete='on' />
-              <div className='absolute text-red-600 text-sm bottom-0 italic'>
-                <ErrorMessage name='password' component='div' />
-              </div>
+              <label htmlFor='deliveryMethod' className='text-blue-900 pb-2'>Delivery Method</label>
+              <Field as='select' id='deliveryMethod' className='rounded-lg py-2 px-4 w-full'>
+                <option value='regular'>Regular</option>
+                <option value='express'>Express</option>
+              </Field>
             </div>
             <div className='flex flex-col items-center mt-4'>
               <button className='bg-blue-700 rounded-lg px-3 py-2 text-blue-100 text-sm' type='submit' disabled={isSubmitting}>

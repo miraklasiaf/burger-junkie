@@ -9,7 +9,7 @@ export default (state, action) => {
       return {
         ...state,
         orders: action.payload,
-        loading: true
+        loading: false
       }
     case 'FETCH_ORDER_FAILED':
       return {

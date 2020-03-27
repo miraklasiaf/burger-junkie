@@ -6,10 +6,10 @@ import { MenuContainer, ButtonWrapper, PriceWrapper } from './styles'
 import PropTypes from 'prop-types'
 
 const types = [
-  { name: 'Salad', label: 'salad' },
   { name: 'Bacon', label: 'bacon' },
   { name: 'Cheese', label: 'cheese' },
-  { name: 'Meat', label: 'meat' }
+  { name: 'Meat', label: 'meat' },
+  { name: 'Salad', label: 'salad' }
 ]
 
 export const Menu = ({ purchase, isPurchasable }) => {
