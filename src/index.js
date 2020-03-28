@@ -7,10 +7,8 @@ import { AuthProvider } from './context/AuthContext'
 import { OrderProvider } from './context/OrderContext'
 import { BurgerProvider } from './context/BurgerContext'
 import { SidebarProvider } from './context/SidebarContext'
-import ErrorBoundary from './ErrorBoundary.js'
 
 const ui = (
-  <ErrorBoundary>
     <AuthProvider>
       <SidebarProvider>
         <BurgerProvider>
@@ -20,7 +18,6 @@ const ui = (
         </BurgerProvider>
       </SidebarProvider>
     </AuthProvider>
-  </ErrorBoundary>
 )
 const container = document.getElementById('root')
 

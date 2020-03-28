@@ -10,6 +10,8 @@ import Footer from './Footer'
 import Spinner from '../components/Spinner'
 import { useAuthState, useAuthDispatch } from '../context/AuthContext'
 import { AppHeader, AppMain, MainWrapper, AppFooter } from './styles'
+import ErrorBoundary from 'react-error-boundary'
+import PropTypes from 'prop-types'
 
 const Auth = lazy(() => {
   return import('../screens/Auth')
@@ -32,7 +34,7 @@ export default function App () {
   }, [checkAuthState])
 
   return (
-    <>
+    <ErrorBoundary FallbackComponent={MyFallbackComponent}>
       <AppHeader>
         <Toolbar />
       </AppHeader>
@@ -60,6 +62,20 @@ export default function App () {
       <AppFooter>
         <Footer />
       </AppFooter>
-    </>
+    </ErrorBoundary>
   )
+}
+
+const MyFallbackComponent = ({ componentStack, error }) => (
+  <div>
+    <p><strong>Oops! An error occured!</strong></p>
+    <p>Here’s what we know…</p>
+    <p><strong>Error:</strong> {error.toString()}</p>
+    <p><strong>Stacktrace:</strong> {componentStack}</p>
+  </div>
+)
+
+MyFallbackComponent.propTypes = {
+  componentStack: PropTypes.node,
+  error: PropTypes.object
 }
