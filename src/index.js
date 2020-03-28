@@ -9,15 +9,15 @@ import { BurgerProvider } from './context/BurgerContext'
 import { SidebarProvider } from './context/SidebarContext'
 
 const ui = (
-    <AuthProvider>
-      <SidebarProvider>
-        <BurgerProvider>
-          <OrderProvider>
-            <App />
-          </OrderProvider>
-        </BurgerProvider>
-      </SidebarProvider>
-    </AuthProvider>
+  <AuthProvider>
+    <SidebarProvider>
+      <BurgerProvider>
+        <OrderProvider>
+          <App />
+        </OrderProvider>
+      </BurgerProvider>
+    </SidebarProvider>
+  </AuthProvider>
 )
 const container = document.getElementById('root')
 
