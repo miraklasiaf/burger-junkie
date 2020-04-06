@@ -1,7 +1,8 @@
-import React, { createContext, useReducer, useContext, useCallback } from 'react'
+import React, { createContext, useContext, useCallback } from 'react'
 import reducer from './reducers/order'
 import axios from 'axios'
 import PropTypes from 'prop-types'
+import useReducerWithLog from '../utils/useReducerWithLog'
 
 // Initial state
 const initialState = {
@@ -16,31 +17,48 @@ export const OrderDispatchContext = createContext()
 
 // Provider component
 export const OrderProvider = ({ children }) => {
-  const [{ orders, loading, purchased }, dispatch] = useReducer(reducer, initialState)
+  const [{ orders, loading, purchased }, dispatch] = useReducerWithLog(
+    reducer,
+    initialState
+  )
 
-  const getOrders = useCallback(async (token, userId) => {
-    try {
-      dispatch({ type: 'FETCH_ORDER_START' })
-      const query = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
-      const res = (await axios.get(`https://burger-junkie.firebaseio.com/orders.json${query}`)).data
-      const fetchOrders = []
-      for (const key in res) {
-        fetchOrders.push({
-          id: key,
-          ...res[key]
+  const getOrders = useCallback(
+    async (token, userId) => {
+      try {
+        dispatch({ type: 'FETCH_ORDER_START' })
+        const query = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
+        const res = (
+          await axios.get(
+            `https://burger-junkie.firebaseio.com/orders.json${query}`
+          )
+        ).data
+        const fetchOrders = []
+        for (const key in res) {
+          fetchOrders.push({
+            id: key,
+            ...res[key]
+          })
+        }
+        dispatch({ type: 'FETCH_ORDER_SUCCESS', payload: fetchOrders })
+      } catch (err) {
+        dispatch({
+          type: 'FETCH_ORDER_FAILED',
+          payload: err.response.data.error
         })
       }
-      dispatch({ type: 'FETCH_ORDER_SUCCESS', payload: fetchOrders })
-    } catch (err) {
-      console.log(err)
-      dispatch({ type: 'FETCH_ORDER_FAILED', payload: err.response.data.error })
-    }
-  }, [dispatch])
+    },
+    [dispatch]
+  )
 
   const purchase = async (orderData, token) => {
     try {
       dispatch({ type: 'PURCHASE_START' })
-      const res = (await axios.post(`https://burger-junkie.firebaseio.com/orders.json?auth=${token}`, orderData)).data
+      const res = (
+        await axios.post(
+          `https://burger-junkie.firebaseio.com/orders.json?auth=${token}`,
+          orderData
+        )
+      ).data
       const newOrder = {
         ...orderData,
         id: res.name
@@ -55,7 +73,9 @@ export const OrderProvider = ({ children }) => {
 
   return (
     <OrderStateContext.Provider value={{ orders, loading, purchased }}>
-      <OrderDispatchContext.Provider value={{ initPurchase, getOrders, purchase }}>
+      <OrderDispatchContext.Provider
+        value={{ initPurchase, getOrders, purchase }}
+      >
         {children}
       </OrderDispatchContext.Provider>
     </OrderStateContext.Provider>

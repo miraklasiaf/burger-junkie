@@ -1,5 +1,6 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import React, { createContext, useContext } from 'react'
 import PropTypes from 'prop-types'
+import useReducerWithLog from '../utils/useReducerWithLog'
 
 // Create context
 export const SidebarContext = createContext()
@@ -16,15 +17,17 @@ const reducer = (state, action) => {
         ...state,
         isSidebarOpen: action.payload
       }
-    default: throw new Error(`Unhandled action type: ${action.type}`)
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`)
   }
 }
 
 // Provider component
 export const SidebarProvider = ({ children }) => {
-  const [{ isSidebarOpen }, dispatch] = useReducer(reducer, initialState)
+  const [{ isSidebarOpen }, dispatch] = useReducerWithLog(reducer, initialState)
 
-  const setSidebar = (isActive) => dispatch({ type: 'SET_SIDEBAR', payload: isActive })
+  const setSidebar = isActive =>
+    dispatch({ type: 'SET_SIDEBAR', payload: isActive })
 
   return (
     <SidebarContext.Provider value={{ isSidebarOpen, setSidebar }}>

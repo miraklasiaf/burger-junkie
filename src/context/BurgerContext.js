@@ -1,7 +1,8 @@
-import React, { createContext, useReducer, useContext, useCallback } from 'react'
+import React, { createContext, useContext, useCallback } from 'react'
 import reducer from './reducers/burger'
 import axios from 'axios'
 import PropTypes from 'prop-types'
+import useReducerWithLog from '../utils/useReducerWithLog'
 
 // Initial state
 const initialState = {
@@ -18,23 +19,29 @@ export const BurgerDispatchContext = createContext()
 
 // Provider component
 export const BurgerProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducerWithLog(reducer, initialState)
 
   const getIngredients = useCallback(async () => {
     try {
-      const res = (await axios.get('https://burger-junkie.firebaseio.com/ingredients.json')).data
+      const res = (
+        await axios.get('https://burger-junkie.firebaseio.com/ingredients.json')
+      ).data
       dispatch({ type: 'SET_INGREDIENTS', payload: res })
     } catch (err) {
       dispatch({ type: 'SET_INGREDIENTS_ERROR', payload: err })
     }
   }, [dispatch])
 
-  const addIngredient = ingredient => dispatch({ type: 'ADD_INGREDIENT', payload: ingredient })
-  const deleteIngredient = ingredient => dispatch({ type: 'DELETE_INGREDIENT', payload: ingredient })
+  const addIngredient = ingredient =>
+    dispatch({ type: 'ADD_INGREDIENT', payload: ingredient })
+  const deleteIngredient = ingredient =>
+    dispatch({ type: 'DELETE_INGREDIENT', payload: ingredient })
 
   return (
     <BurgerStateContext.Provider value={state}>
-      <BurgerDispatchContext.Provider value={{ getIngredients, addIngredient, deleteIngredient }}>
+      <BurgerDispatchContext.Provider
+        value={{ getIngredients, addIngredient, deleteIngredient }}
+      >
         {children}
       </BurgerDispatchContext.Provider>
     </BurgerStateContext.Provider>
