@@ -30,11 +30,9 @@ export const AuthProvider = ({ children }) => {
   const authentication = async (email, password, isSignup) => {
     try {
       dispatch({ type: 'AUTH_START', payload: true })
-      let url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAPKiYvvgZuvQp80yWnzhCElew_9-VnNv4'
+      let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
       if (isSignup) {
-        url =
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAPKiYvvgZuvQp80yWnzhCElew_9-VnNv4'
+        url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`
       }
       const authData = {
         email,
