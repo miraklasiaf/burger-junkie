@@ -9,8 +9,6 @@ export default function Order () {
   const { orders, loading } = useOrderState()
   const { token, userId } = useAuthState()
 
-  console.log(loading)
-
   useEffect(() => {
     getOrders(token, userId)
   }, [getOrders, token, userId])
@@ -32,9 +30,7 @@ export default function Order () {
 
   return (
     <div className='bg-blue-100 flex flex-col items-center justify-center px-5 pt-5 pb-64 border-content'>
-      <h1 className='text-center text-blue-900 text-lg'>
-                Order Page
-      </h1>
+      <h1 className='text-center text-blue-900 text-lg'>Order Page</h1>
       {result}
     </div>
   )
